@@ -1,6 +1,6 @@
 # from django.utils import timezone
 # from django.http import Http404
-from django_countries import countries
+# from django_countries import countries
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import render
 from django.core.paginator import Paginator
@@ -40,6 +40,7 @@ def room_detail(request, pk):
     except models.Room.DoesNotExist:
         raise Http404()
 '''
+
 
 class SearchView(View):
     def get(self, request):
@@ -95,7 +96,7 @@ class SearchView(View):
 
                 for amenity in amenities:
                     filter_args["amenities"] = amenity
-                
+
                 for facility in facilities:
                     filter_args["facilities"] = facility
 
@@ -107,15 +108,7 @@ class SearchView(View):
 
                 rooms = paginator.get_page(page)
 
-                                
-                '''
-                for amenity in amenities:
-                    rooms = rooms.filter(amenities=amenity)
-
-                for facility in facilities:
-                    rooms = rooms.filter(facilities=facility)
-                '''
-                urll = request.get_full_path() 
+                urll = request.get_full_path()
                 if "page" not in urll:
                     urll += "&page"
                 else:
@@ -125,13 +118,15 @@ class SearchView(View):
                     urll = urll.rstrip(remove_str)
 
                 print(urll)
-                return render(request, "rooms/search.html", {"form": form, "rooms": rooms, "urll": urll})
+                return render(
+                    request, "rooms/search.html",
+                    {"form": form, "rooms": rooms, "urll": urll}
+                )
         else:
             form = forms.SearchForm()
-            
+
         return render(request, "rooms/search.html", {"form": form})
 
-    
 
 '''
 def search(request):
