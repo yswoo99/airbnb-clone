@@ -132,19 +132,19 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
 AUTH_USER_MODEL = "users.User"
 
-MEDIA_ROOT = BASE_DIR + "/uploads"
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
 
 # Email Configuration
-EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST = "smtp.naver.com"
 EMAIL_HOST_USER = os.environ.get("NAVER_USERNAME")
 EMAIL_HOST_PASSWORD = os.environ.get("NAVER_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_FROM = os.environ.get("FROM_NAVER")
 # DEFAULT_FROM_MAIL = os.environ.get("NAVER_USERNAME")
-
-

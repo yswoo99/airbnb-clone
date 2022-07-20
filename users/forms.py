@@ -21,7 +21,6 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.ModelForm):
-
     class Meta:
         model = models.User
         fields = ("first_name", "last_name", "email")
