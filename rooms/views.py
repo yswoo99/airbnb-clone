@@ -9,37 +9,38 @@ from . import forms, models
 
 # Create your views here.
 class HomeView(ListView):
-    ''' HomeView definition '''
+    """HomeView definition"""
 
     model = models.Room
-    paginate_by = 10
+    paginate_by = 12
     paginate_orphans = 5
     ordering = "created"
     context_object_name = "rooms"
 
 
-'''
+"""
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         now = timezone.now()
         context["now"] = now
         return context
-'''
+"""
 
 
 class RoomDetail(DetailView):
-    ''' RoomDetail difinition '''
+    """RoomDetail difinition"""
+
     model = models.Room
 
 
-'''
+"""
 def room_detail(request, pk):
     try:
         room = models.Room.objects.get(pk=pk)
         return render(request, "rooms/detail.html", {"room": room})
     except models.Room.DoesNotExist:
         raise Http404()
-'''
+"""
 
 
 class SearchView(View):
@@ -119,8 +120,9 @@ class SearchView(View):
 
                 print(urll)
                 return render(
-                    request, "rooms/search.html",
-                    {"form": form, "rooms": rooms, "urll": urll}
+                    request,
+                    "rooms/search.html",
+                    {"form": form, "rooms": rooms, "urll": urll},
                 )
         else:
             form = forms.SearchForm()
@@ -128,7 +130,7 @@ class SearchView(View):
         return render(request, "rooms/search.html", {"form": form})
 
 
-'''
+"""
 def search(request):
 
 using python
@@ -214,4 +216,4 @@ using python
             rooms = rooms.filter(facilities__pk=int(s_facility))
 
     return render(request, "rooms/search.html", {**form, **choices})
-'''
+"""
