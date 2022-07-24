@@ -9,12 +9,15 @@
 {% endblock search-bar %}
 
 {% block content %}
-    {% include "partials/social_login.html" %}
+    <div class="container lg:w-5/12 xl:w-1/4 md:w-1/2 mx-auto flex flex-col items-center my-10 border p-6 border-gray-400">
+        {% include "partials/social_login.html" %}
 
-    <form method="POST" action="{% url "users:signup" %}">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Signup</button>
-    </form>
+        {% include 'mixins/auth/auth_form.html' with form=form cta="Sign up" %}
+
+        <div>
+            <span class="mr-5">Have an account?</span>
+            <a href="{% url 'users:login' %}" class="text-teal-500 font-bold">Log in</a>
+        </div>
+    </div>
 
 {% endblock content %}
