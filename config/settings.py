@@ -148,3 +148,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_FROM = os.environ.get("FROM_NAVER")
 # DEFAULT_FROM_MAIL = os.environ.get("NAVER_USERNAME")
+
+# Auth
+
+LOGIN_URL = "/users/login/"
