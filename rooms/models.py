@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
 from core import models as core_models
+from users.models import User
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -114,3 +115,16 @@ class Room(core_models.TimeStampedModel):
     def first_photo(self):
         (photo,) = self.photos.all()[:1]
         return photo.file.url
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
+
+    """
+    : use pluralize in room_detail.html
+    def get_beds(self):
+        if self.beds == 1:
+            return "1 bed"
+        else:
+            return f"{self.beds} beds"
+    """
