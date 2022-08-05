@@ -113,14 +113,18 @@ class Room(core_models.TimeStampedModel):
             return 0
 
     def first_photo(self):
-        if self.photos.all():
+        try:
             (photo,) = self.photos.all()[:1]
             return photo.file.url
+        except ValueError:
+            return None
 
     def get_next_four_photos(self):
-        if self.photos.all():
+        try:
             photos = self.photos.all()[1:5]
             return photos
+        except ValueError:
+            return None
 
     """
     : use pluralize in room_detail.html
