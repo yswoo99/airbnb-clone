@@ -1,4 +1,6 @@
 import os, requests
+from django.utils import translation
+from django.http import HttpResponse
 import profile
 from unittest import result
 from django.forms import PasswordInput
@@ -279,6 +281,13 @@ def switch_hosting(request):
     except KeyError:
         request.session["is_hosting"] = True
     return redirect(reverse("core:home"))
+
+
+def switch_language(request):
+    lang = request.GET.get("lang", None)
+    if lang is not None:
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang
+    return HttpResponse(status=200)
 
 
 """
