@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "julrq+8fl0ar84pem1904$lz6*j*nifyv-y*4f*@eax5o+6ob7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG"))
 
 ALLOWED_HOSTS = "*"
 
@@ -87,12 +87,24 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRESQL_NAME"),
+            "PASSWORD": os.environ.get("POSTGRESQL_PASSWORD"),
+            "PORT": "5432",
+            "USER": os.environ.get("POSTGRESQL_USER"),
+            "HOST": os.environ.get("POSTGRESQL_HOST"),
+        }
+    }
 
 
 # Password validation
