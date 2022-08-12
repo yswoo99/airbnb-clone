@@ -69,7 +69,7 @@ class User(AbstractUser):
     login_method = models.CharField(
         max_length=30, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
-    objects = core_managers.CustomModelManager()
+    objects = core_managers.CustomUserManager()
 
     # For "VIEW ON SITE" in admin panel
     def get_absolute_url(self):
