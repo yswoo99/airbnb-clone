@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -174,7 +176,7 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 if not DEBUG:
     sentry_sdk.init(
-        dsn="https://47e5ff1389374c779707907c7383af76@o1356776.ingest.sentry.io/6642546",
+        dsn=os.environ.get("SENTRY_URL"),
         integrations=[
             DjangoIntegration(),
         ],
