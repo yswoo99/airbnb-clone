@@ -87,7 +87,7 @@ def complete_verification(request, key):
 
 def github_login(request):
     client_id = os.environ.get("GITHUB_ID")
-    redirect_uri = "http://airbnb-clone-ysw.eba-frp2k7ha.ap-northeast-2.elasticbeanstalk.com/users/login/github/callback"
+    redirect_uri = "https://airbnb-clone-ysw.herokuapp.com/users/login/github/callback"
     return redirect(
         f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope=read:user"
     )
@@ -158,7 +158,7 @@ def github_callback(request):
 
 def kakao_login(request):
     client_id = os.environ.get("KAKAO_API_KEY")
-    redirect_uri = "http://airbnb-clone-ysw.eba-frp2k7ha.ap-northeast-2.elasticbeanstalk.com/users/login/kakao/callback"
+    redirect_uri = "https://airbnb-clone-ysw.herokuapp.com/users/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -173,7 +173,9 @@ def kakao_callback(request):
         code = request.GET.get("code")
         print(f"code:{code}")
         client_id = os.environ.get("KAKAO_API_KEY")
-        redirect_uri = "http://airbnb-clone-ysw.eba-frp2k7ha.ap-northeast-2.elasticbeanstalk.com/users/login/kakao/callback"
+        redirect_uri = (
+            "https://airbnb-clone-ysw.herokuapp.com/users/login/kakao/callback"
+        )
         token_request = requests.post(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}"
         )
